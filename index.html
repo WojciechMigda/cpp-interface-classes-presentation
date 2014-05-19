@@ -18,7 +18,11 @@
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <!--
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    -->
+    <link rel="stylesheet" href="lib/css/tomorrow-night-bright.css">
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -36,16 +40,313 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h1>C++ Interface Classes</h1>
+				<section data-background="#0a3c59">
+					<h1>C++ (and C) Interfaces</h1>
 					<h3>Practical 101</h3>
 					<p>
 						<small>Created by Wojciech Migda</small>
 					</p>
 				</section>
 
+<section data-background="#0a3c59">
 
-				<section>
+  <h2>Literature</h2>
+
+  <ul>
+  <li>Radford, M. <i>C++ Interface Classes - An Introduction</i>, Overload  <i>62</i>, <b>2004</b>, 21.</li>
+  <li>Navia, J. <i>A container library for C</i>, ISO/IEC JTC1/SC22/WG14 - C, <i>N1625</i>, <b>2012</b>.</li>
+  </ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ interface class</h2>
+
+<pre><code class="c++">class I {
+public:
+  virtual void foo(void) = 0;
+};
+</code></pre>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ interface class</h2>
+
+<p>
+destructor?
+</p>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ interface class</h2>
+
+<p>
+destructor?
+</p>
+<ul>
+<li>yes,</li>
+<li>virtual and public.</li>
+</ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ interface class</h2>
+
+<p>
+constructor?
+</p>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ interface class</h2>
+
+<p>
+constructor?
+</p>
+<ul>
+<li>default,
+</li>
+<li>leave it to the compiler.
+</li>
+</ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ interface class</h2>
+
+<p>
+copy operator?
+</p>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ interface class</h2>
+
+<p>
+copy operator?
+</p>
+<ul>
+<li>no,
+</li>
+<li>disabled (private and undefined)
+</li>
+</ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ interface class</h2>
+
+<pre><code class="c++">class I {
+public:
+  // default constructor
+  virtual void foo(void) = 0;
+  virtual ~I(void){}
+private:
+  I& operator=(const I &);
+};
+</code></pre>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ implementation class</h2>
+
+<pre><code class="c++">class D : public I {
+//[access-specifier]:
+  virtual void foo(void){}
+};
+</code></pre>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ implementation class</h2>
+
+<p>
+destructor?
+</p>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ implementation class</h2>
+
+<p>
+destructor?
+</p>
+<ul>
+<li>yes,</li>
+<li>virtual and public.</li>
+</ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ implementation class</h2>
+
+<p>
+constructor?
+</p>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ implementation class</h2>
+
+<p>
+constructor?
+</p>
+<ul>
+<li>yes,
+</li>
+<li>public,
+</li>
+<li>explicitly calls interface class constructor.
+</li>
+</ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ implementation class</h2>
+
+<p>
+interface methods' access?
+</p>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ implementation class</h2>
+
+<p>
+interface methods' access?
+</p>
+<ul>
+<li>private.
+</li>
+</ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ implementation class</h2>
+
+<pre><code class="c++">class D : public I {
+public:
+  D() : I() {}
+  virtual ~D(void){}
+private:
+  virtual void foo(void){};
+};
+</code></pre>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ factory</h2>
+
+<p>where?
+</p>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ factory</h2>
+
+<p>where?
+</p>
+<ul>
+<li>separate free function.
+</li>
+</ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ factory</h2>
+
+<p>what should it return?
+</p>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ factory</h2>
+
+<p>what should it return?
+</p>
+<ul>
+<li>raw pointer,
+</li>
+<li>smart pointer with ownership transfer (std::auto_ptr, std::unique_ptr),
+</li>
+</ul>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ factory</h2>
+
+<pre><code class="c++">std::unique_ptr&lt;IFileObject&gt; createFileObject(const std::string & in_path);
+</code></pre>
+
+not so good..
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C++ factory</h2>
+
+<pre><code class="c++">class IFileObject {
+public:
+typedef std::unique_ptr&lt;IFileObject&gt;    ptr;
+...
+};
+
+IFileObject::ptr createFileObject(const std::string & in_path);
+</code></pre>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C interface</h2>
+
+
+</section>
+
+
+				<section data-background="#0a3c59">
 					<h1>THE END</h1>
 					<h3>BY Wojciech Migda</h3>
 				</section>
