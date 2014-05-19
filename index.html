@@ -55,6 +55,8 @@
   <ul>
   <li>Radford, M. <i>C++ Interface Classes - An Introduction</i>, Overload  <i>62</i>, <b>2004</b>, 21.</li>
   <li>Navia, J. <i>A container library for C</i>, ISO/IEC JTC1/SC22/WG14 - C, <i>N1625</i>, <b>2012</b>.</li>
+  <li>Griffiths, A. Radford, M. <i>Separating Interface and Implementation in C++</i>, Overload  <i>66</i>, <b>2005</b>, 16.</li>
+  <li>Radford, M. <i>C++ Interface Classes - Noise Reduction</i>, Overload  <i>68</i>, <b>2005</b>, 6.</li>
   </ul>
 
 </section>
@@ -290,7 +292,7 @@ private:
 
 <section data-background="#0a3c59">
 
-  <h2>C++ factory</h2>
+  <h2>C++ factory function</h2>
 
 <p>what should it return?
 </p>
@@ -299,7 +301,7 @@ private:
 
 <section data-background="#0a3c59">
 
-  <h2>C++ factory</h2>
+  <h2>C++ factory function</h2>
 
 <p>what should it return?
 </p>
@@ -314,18 +316,18 @@ private:
 
 <section data-background="#0a3c59">
 
-  <h2>C++ factory</h2>
+  <h2>C++ factory function</h2>
 
 <pre><code class="c++">std::unique_ptr&lt;IFileObject&gt; createFileObject(const std::string & in_path);
 </code></pre>
 
-not so good..
+we can do better than that..
 
 </section>
 
 <section data-background="#0a3c59">
 
-  <h2>C++ factory</h2>
+  <h2>C++ factory function</h2>
 
 <pre><code class="c++">class IFileObject {
 public:
@@ -342,6 +344,28 @@ IFileObject::ptr createFileObject(const std::string & in_path);
 
   <h2>C interface</h2>
 
+<p>Boundaries of the interface will be emphasized by a struct of function pointers.
+</p>
+<pre><code class="c">struct tagListInterface {
+  int (* const Add)(List * L, const void * newval);
+  int (* const Clear)(List * L);
+  int (* const Contains)(const List * L, const void * element);
+//...
+};
+</code></pre>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C interface</h2>
+
+<p>Interface structure is either a global variable or its pointer is returned by a factory function.
+</p>
+<pre><code class="c">struct tagListInterface const * iList(void);
+//...
+iList()->Clear(list_ptr);
+</code></pre>
 
 </section>
 
@@ -349,6 +373,10 @@ IFileObject::ptr createFileObject(const std::string & in_path);
 				<section data-background="#0a3c59">
 					<h1>THE END</h1>
 					<h3>BY Wojciech Migda</h3>
+				</section>
+
+				<section data-background="#0a3c59">
+					<h1>Q&A</h1>
 				</section>
 
 			</div>
