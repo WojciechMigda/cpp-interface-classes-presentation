@@ -369,6 +369,21 @@ iList()->Clear(list_ptr);
 
 </section>
 
+<section data-background="#0a3c59">
+
+  <h2>C interface</h2>
+
+<p>We can even introduce polymorphism and private interface by means of VTable pointer:
+</p>
+<pre><code class="c">struct _List {
+  ListInterface *  VTable;
+  list_element *   Last;
+  list_element *   First;
+  //...
+};
+</code></pre>
+
+</section>
 
 				<section data-background="#0a3c59">
 					<h1>THE END</h1>
