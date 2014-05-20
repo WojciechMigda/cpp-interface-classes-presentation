@@ -385,6 +385,42 @@ iList()->Clear(list_ptr);
 
 </section>
 
+<section data-background="#0a3c59">
+
+  <h2>C interface "polymorphism"</h2>
+
+<pre><code class="c">void test_1(void) {
+  struct Mock {
+    static int empty(ListCPtr self) { return 0; }
+  } mock;
+
+  struct ListInterface interface = {0, 0, mock.empty, 0};
+  ListPtr list_p = give_random_list();
+  list_p->vTable = &interface;
+  // do the test
+}
+</code></pre>
+
+</section>
+
+<section data-background="#0a3c59">
+
+  <h2>C interface "polymorphism"</h2>
+
+<pre><code class="c">int empty(ListCPtr self) {
+  int result;
+  if (self->vTable->empty && self->vTable->empty != empty) {
+    result = self->vTable->empty(self);
+  }
+  else {
+    result = empty_impl(self);
+  }
+  return result;
+}
+</code></pre>
+
+</section>
+
 				<section data-background="#0a3c59">
 					<h1>THE END</h1>
 					<h3>BY Wojciech Migda</h3>
